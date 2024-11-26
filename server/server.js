@@ -2,12 +2,21 @@ import { createRequestHandler } from "@remix-run/express";
 import "dotenv/config";
 import express from "express";
 import { connectDB } from "./config/database.js";
+import { createGroup } from "./controllers/controllers.js";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const app = express();
 
 connectDB();
+
+// // accept Content-Type: application/json
+// app.use(express.json());
+// accept Content-Type: application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// routes
+app.post("/create", createGroup);
 
 const viteDevServer =
   process.env.NODE_ENV === "production"
@@ -29,9 +38,6 @@ const build = viteDevServer
 const remixHandler = createRequestHandler({ build });
 
 app.all("*", remixHandler);
-
-// routes
-app.get("/", (req, res) => res.send("Hello from the deployed server!"));
 
 app.listen(port, () => {
   console.log(`App listening on http://localhost:${port}`);

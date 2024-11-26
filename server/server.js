@@ -1,5 +1,13 @@
 import { createRequestHandler } from "@remix-run/express";
+import "dotenv/config";
 import express from "express";
+import { connectDB } from "./config/database.js";
+
+const port = process.env.PORT || 3000;
+
+const app = express();
+
+connectDB();
 
 const viteDevServer =
   process.env.NODE_ENV === "production"
@@ -10,17 +18,21 @@ const viteDevServer =
         })
       );
 
-const app = express();
 app.use(
   viteDevServer ? viteDevServer.middlewares : express.static("build/client")
 );
 
 const build = viteDevServer
   ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
-  : await import("./build/server/index.js");
+  : await import("../build/server/index.js");
 
-app.all("*", createRequestHandler({ build }));
+const remixHandler = createRequestHandler({ build });
 
-app.listen(3000, () => {
-  console.log("App listening on http://localhost:3000");
+app.all("*", remixHandler);
+
+// routes
+app.get("/", (req, res) => res.send("Hello from the deployed server!"));
+
+app.listen(port, () => {
+  console.log(`App listening on http://localhost:${port}`);
 });

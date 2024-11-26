@@ -3,8 +3,8 @@
 ## Road Map:
 
 ### Stage One
-- [ ] Create a family/group (POST)
-- [ ] To that group, add all members (POST)
+- [ X ] Create a family/group (POST)
+- [ X ] To that group, add all members (POST)
 - [ ] Randomly assign all members to another group member who is not themselves
 
 ### Stage Two

@@ -3,4 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [remix()],
+  server: {
+    proxy: { "/api": "http://localhost:3000" },
+  },
 });

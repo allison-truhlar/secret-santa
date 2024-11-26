@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const memberSchema = new Schema({ name: String });
-
 export const groupSchema = new Schema(
   {
     name: { type: String, required: true },
-    members: [{ type: memberSchema, required: true }],
+    members: [String],
     matches: [
       {
         year: Number,
@@ -22,4 +20,6 @@ export const groupSchema = new Schema(
   { timestamps: true }
 );
 
-export const Group = mongoose.model("Group", groupSchemaSchema);
+const Group = mongoose.model("Group", groupSchema);
+
+export default Group;

@@ -10,8 +10,8 @@ export const groupSchema = new Schema(
         year: Number,
         assignments: [
           {
-            giverId: String,
-            receiverId: String,
+            giver: String,
+            receiver: String,
           },
         ],
       },

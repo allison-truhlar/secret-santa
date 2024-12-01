@@ -4,7 +4,7 @@ import express from "express";
 import { connectDB } from "./config/database.js";
 import { createGroup } from "./controllers/controllers.js";
 
-const port = process.env.PORT || 5000;
+const port = process.env.API_PORT;
 
 const app = express();
 

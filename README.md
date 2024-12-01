@@ -5,7 +5,7 @@
 ### Stage One
 - [X] Create a family/group (POST)
 - [X] To that group, add all members (POST)
-- [ ] Randomly assign all members to another group member who is not themselves
+- [X] Randomly assign all members to another group member who is not themselves
 
 ### Stage Two
 - [ ] Create a “returning users” option, where you can type in your group name to access all the group members you input last year (READ) and use these names for the random assignments this year

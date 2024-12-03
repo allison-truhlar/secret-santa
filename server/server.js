@@ -1,8 +1,9 @@
 import { createRequestHandler } from "@remix-run/express";
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import { connectDB } from "./config/database.js";
-import { createGroup } from "./controllers/controllers.js";
+import apiRoutes from "./routes/index.js";
 
 const port = process.env.API_PORT;
 
@@ -11,12 +12,16 @@ const app = express();
 connectDB();
 
 // // accept Content-Type: application/json
-// app.use(express.json());
-// accept Content-Type: application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// app.use(cors({ origin: "http://localhost:5000" }));
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`, req.body);
+  next();
+});
 
 // routes
-app.post("/create", createGroup);
+app.use("/api", apiRoutes);
 
 const viteDevServer =
   process.env.NODE_ENV === "production"

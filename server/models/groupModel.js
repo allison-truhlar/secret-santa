@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 export const groupSchema = new Schema(
   {
     name: { type: String, required: true },
-    members: [String],
+    members: [{ name: String }],
     matches: [
       {
         year: Number,
